@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitReturns": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": false,
+    "outDir": "lib",
+    "sourceMap": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "target": "es2018",
+    "experimentalDecorators": true
+  },
+  "compileOnSave": true,
+  "include": ["src/**/**/*.ts", "test/**/*.ts"],
+  "exclude": ["node_modules"]
+}
