@@ -1,8 +1,7 @@
 import { InvalidArgument } from "../exceptions/invalid_argument";
-import { InvalidLength } from "../exceptions/invalid_length";
 import { ValueObject } from "./value_object";
 
-class Gtin13 implements ValueObject<string> {
+export class Gtin13 implements ValueObject<string> {
   readonly type: string;
 
   constructor(readonly value: string) {
@@ -27,9 +26,6 @@ class Gtin13 implements ValueObject<string> {
   }
 
   private ensureIsValidGtin13(id: string): void {
-    //Check the length
-    if (id.length != 13) throw new InvalidLength("gtin13");
-
     //Check if they are only numbers
     const regExpOnlyNumbers = new RegExp(/^\d+$/);
     if (regExpOnlyNumbers.test(id) == false)
