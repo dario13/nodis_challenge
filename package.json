@@ -44,6 +44,7 @@
     }
   },
   "dependencies": {
+    "class-validator": "^0.13.0",
     "uuid": "^8.3.2"
   }
 }
