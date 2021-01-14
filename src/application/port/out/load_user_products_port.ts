@@ -1,5 +1,5 @@
 import { UserProduct } from "../../../domain/user_product";
 
-export interface LoadUserProducts {
+export interface LoadUserProductsPort {
   loadUserProducts(email: string): Array<UserProduct>;
 }
