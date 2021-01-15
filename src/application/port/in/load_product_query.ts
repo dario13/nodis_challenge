@@ -1,5 +1,5 @@
 import { Product } from "../../../domain/product";
 
-export interface getProductQuery {
+export interface LoadProductQuery {
   getProduct(gtin13: string): Product;
 }
