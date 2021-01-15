@@ -1,12 +1,8 @@
-import { InvalidArgument } from "./exceptions/invalid_argument";
+import { InvalidArgument } from "./errors/invalid_argument";
 import { Product } from "./product";
 import { User } from "./user";
 
-enum Status {
-  created,
-  updated,
-  deleted,
-}
+export type Status = "created" | "updated" | "deleted";
 
 export class UserProduct {
   private _user: User;
@@ -25,7 +21,7 @@ export class UserProduct {
     this._product = product;
     this._price = price;
     this._quantity = quantity;
-    this._status = Status.created;
+    this._status = "created";
     this._createdAt = new Date(Date.now());
   }
 
@@ -38,7 +34,7 @@ export class UserProduct {
   }
 
   private ensureIsNotDeleted() {
-    if (this._status === Status.deleted) {
+    if (this._status === "deleted") {
       throw new Error("Cant update deleted product");
     }
   }
@@ -58,7 +54,7 @@ export class UserProduct {
     this.ensurePriceIsBiggerThanZero(newPrice);
     this.ensurePriceReductionIsNotLessThanFiftyPercent(newPrice);
     this._price = newPrice;
-    this._status = Status.updated;
+    this._status = "updated";
     this._updatedAt = new Date(Date.now());
   }
 
@@ -66,7 +62,7 @@ export class UserProduct {
     this.ensureIsNotDeleted();
     this.ensureIsValidQuantityForUpdate(newQuantity);
     this._quantity = newQuantity;
-    this._status = Status.updated;
+    this._status = "updated";
     this._updatedAt = new Date(Date.now());
   }
 
@@ -80,7 +76,7 @@ export class UserProduct {
 
   public delete() {
     this.ensureIsNotDeleted();
-    this._status = Status.deleted;
+    this._status = "deleted";
     this._deletedAt = new Date(Date.now());
   }
 }

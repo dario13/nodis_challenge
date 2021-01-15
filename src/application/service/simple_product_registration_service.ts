@@ -1,4 +1,4 @@
-import { UserProduct } from "../../domain/user_product";
+import { Status, UserProduct } from "../../domain/user_product";
 import { SimpleProductRegistrationCommand } from "../port/in/simple_product_registration_command";
 import { SimpleProductRegistrationUseCase } from "../port/in/simple_product_registration_use_case";
 import { LoadProductPort } from "../port/out/load_product_port";
@@ -14,16 +14,20 @@ export class SimpleProductRegistrationService
   ) {}
 
   registerAproduct(command: SimpleProductRegistrationCommand) {
-    const product = this.loadProductPort.loadProduct(command.gtin13);
-    const user = this.loadUserPort.loadUser(command.email);
+    try {
+      const product = this.loadProductPort.loadProduct(command.gtin13);
+      const user = this.loadUserPort.loadUser(command.email);
 
-    const userProduct = new UserProduct(
-      user,
-      product,
-      command.price,
-      command.quantity
-    );
-    this.registerUserProductPort.registerUserProduct(userProduct);
-    return true;
+      const userProduct = new UserProduct(
+        user,
+        product,
+        command.price,
+        command.quantity
+      );
+      this.registerUserProductPort.registerUserProduct(userProduct);
+      return "created";
+    } catch (error) {
+      return error;
+    }
   }
 }
