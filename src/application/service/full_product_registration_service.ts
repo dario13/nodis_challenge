@@ -1,5 +1,5 @@
 import { Product } from "../../domain/product";
-import { UserProduct } from "../../domain/user_product";
+import { Status, UserProduct } from "../../domain/user_product";
 import { FullProductRegistrationCommand } from "../port/in/full_product_registration_command";
 import { FullProductRegistrationUseCase } from "../port/in/full_product_registration_use_case";
 import { LoadProductPort } from "../port/out/load_product_port";
@@ -16,25 +16,29 @@ export class FullProductRegistrationService
     readonly registerProductPort: RegisterProductPort
   ) {}
 
-  registerAproduct(command: FullProductRegistrationCommand): boolean {
-    this.searchIfProductExists(command.gtin13, command.name);
+  registerAproduct(command: FullProductRegistrationCommand): Status | Error {
+    try {
+      this.searchIfProductExists(command.gtin13, command.name);
 
-    const user = this.loadUserPort.loadUser(command.email);
-    const product = new Product(
-      command.name,
-      command.description,
-      command.gtin13,
-      command.images
-    );
-    const userProduct = new UserProduct(
-      user,
-      product,
-      command.price,
-      command.quantity
-    );
-    this.registerProductPort.registerProduct(product);
-    this.registerUserProductPort.registerUserProduct(userProduct);
-    return true;
+      const user = this.loadUserPort.loadUser(command.email);
+      const product = new Product(
+        command.name,
+        command.description,
+        command.gtin13,
+        command.images
+      );
+      const userProduct = new UserProduct(
+        user,
+        product,
+        command.price,
+        command.quantity
+      );
+      this.registerProductPort.registerProduct(product);
+      this.registerUserProductPort.registerUserProduct(userProduct);
+      return "created";
+    } catch (error) {
+      return error;
+    }
   }
 
   searchIfProductExists(gtin13: string, name: string) {

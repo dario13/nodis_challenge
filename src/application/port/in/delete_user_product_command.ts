@@ -1,6 +1,6 @@
 import { Length, IsNotEmpty, IsEmail } from "class-validator";
 
-export class deleteProductCommand {
+export class DeleteUserProductCommand {
   @IsNotEmpty()
   @Length(13, 13)
   readonly gtin13: string;
