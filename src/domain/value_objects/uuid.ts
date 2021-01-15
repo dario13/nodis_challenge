@@ -1,5 +1,5 @@
 import { v4 as uuid, validate as uuidValidate } from "uuid";
-import { InvalidArgument } from "../exceptions/invalid_argument";
+import { InvalidArgument } from "../errors/invalid_argument";
 
 export class Uuid {
   readonly value: string;
@@ -16,8 +16,7 @@ export class Uuid {
 
   private ensureIsValidUuid(id: string): void {
     if (!uuidValidate(id)) {
-      throw new InvalidArgument("id")
+      throw new InvalidArgument("id");
     }
   }
-
 }

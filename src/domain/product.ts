@@ -25,6 +25,10 @@ export class Product {
     return this._id;
   }
 
+  get gtin13() {
+    return this._gtin13.value;
+  }
+
   get name() {
     return this._name;
   }
