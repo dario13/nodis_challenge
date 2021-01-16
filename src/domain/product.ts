@@ -12,9 +12,10 @@ export class Product {
     name: string,
     description: string,
     gtin13: string,
-    images: Array<string>
+    images: Array<string>,
+    id?: Uuid
   ) {
-    this._id = Uuid.random();
+    this._id = id || Uuid.random();
     this._name = name;
     this._description = description;
     this._gtin13 = new Gtin13(gtin13);

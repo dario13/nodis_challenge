@@ -5,8 +5,8 @@ export class User {
   private _name: string;
   private _email: string;
 
-  constructor(name: string, email: string) {
-    this._id = Uuid.random();
+  constructor(name: string, email: string, id?: Uuid) {
+    this._id = id || Uuid.random();
     this._name = name;
     this._email = email;
   }

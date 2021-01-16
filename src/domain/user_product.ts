@@ -1,10 +1,12 @@
 import { InvalidArgument } from "./errors/invalid_argument";
 import { Product } from "./product";
 import { User } from "./user";
+import { Uuid } from "./value_objects/uuid";
 
 export type Status = "created" | "updated" | "deleted";
 
 export class UserProduct {
+  private _id: Uuid;
   private _user: User;
   private _product: Product;
   private _price: number;
@@ -14,9 +16,16 @@ export class UserProduct {
   private _updatedAt: Date;
   private _deletedAt: Date;
 
-  constructor(user: User, product: Product, price: number, quantity: number) {
+  constructor(
+    user: User,
+    product: Product,
+    price: number,
+    quantity: number,
+    id?: Uuid
+  ) {
     this.ensurePriceIsBiggerThanZero(price);
     this.ensureIsValidQuantityForCreation(quantity);
+    this._id = id || Uuid.random();
     this._user = user;
     this._product = product;
     this._price = price;
@@ -72,6 +81,10 @@ export class UserProduct {
 
   get quantity() {
     return this._quantity;
+  }
+
+  get id() {
+    return this._id;
   }
 
   public delete() {
