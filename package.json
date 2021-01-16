@@ -44,6 +44,7 @@
     }
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "class-validator": "^0.13.0",
     "uuid": "^8.3.2"
   }
