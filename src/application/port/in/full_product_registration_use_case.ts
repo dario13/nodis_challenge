@@ -2,5 +2,7 @@ import { FullProductRegistrationCommand } from "./full_product_registration_comm
 import { Status } from "../../../domain/user_product";
 
 export interface FullProductRegistrationUseCase {
-  registerAproduct(command: FullProductRegistrationCommand): Status | Error;
+  registerAproduct(
+    command: FullProductRegistrationCommand
+  ): Promise<Status | Error>;
 }

@@ -13,10 +13,10 @@ export class SimpleProductRegistrationService
     readonly registerUserProductPort: RegisterUserProductPort
   ) {}
 
-  registerAproduct(command: SimpleProductRegistrationCommand) {
+  async registerAproduct(command: SimpleProductRegistrationCommand) {
     try {
-      const product = this.loadProductPort.loadProduct(command.gtin13);
-      const user = this.loadUserPort.loadUser(command.email);
+      const product = await this.loadProductPort.loadProduct(command.gtin13);
+      const user = await this.loadUserPort.loadUser(command.email);
 
       const userProduct = new UserProduct(
         user,

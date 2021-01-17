@@ -2,5 +2,7 @@ import { SimpleProductRegistrationCommand } from "./simple_product_registration_
 import { Status } from "../../../domain/user_product";
 
 export interface SimpleProductRegistrationUseCase {
-  registerAproduct(command: SimpleProductRegistrationCommand): Status | Error;
+  registerAproduct(
+    command: SimpleProductRegistrationCommand
+  ): Promise<Status | Error>;
 }

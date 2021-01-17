@@ -16,11 +16,13 @@ export class FullProductRegistrationService
     readonly registerProductPort: RegisterProductPort
   ) {}
 
-  registerAproduct(command: FullProductRegistrationCommand): Status | Error {
+  async registerAproduct(
+    command: FullProductRegistrationCommand
+  ): Promise<Status | Error> {
     try {
       this.searchIfProductExists(command.gtin13, command.name);
 
-      const user = this.loadUserPort.loadUser(command.email);
+      const user = await this.loadUserPort.loadUser(command.email);
       const product = new Product(
         command.name,
         command.description,

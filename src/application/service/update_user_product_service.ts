@@ -9,9 +9,11 @@ export class UpdateUserProductService implements UpdateUserProductUseCase {
     readonly loadUserProductPort: LoadUserProductPort,
     readonly registerUserPort: RegisterUserProductPort
   ) {}
-  updateUserProduct(command: UpdateUserProductCommand): Status | Error {
+  async updateUserProduct(
+    command: UpdateUserProductCommand
+  ): Promise<Status | Error> {
     try {
-      const product = this.loadUserProductPort.loadUserProduct(
+      const product = await this.loadUserProductPort.loadUserProduct(
         command.email,
         command.gtin13
       );

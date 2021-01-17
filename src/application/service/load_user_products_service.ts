@@ -9,9 +9,11 @@ export class GetUserProductsService implements LoadUserProducstQuery {
     readonly loadUserProductsPort: LoadUserProductsPort
   ) {}
 
-  getUserProducts(email: string): Array<UserProduct> {
-    const user = this.loadUserPort.loadUser(email);
-    const userProducts = this.loadUserProductsPort.loadUserProducts(user.email);
+  async getUserProducts(email: string): Promise<Array<UserProduct>> {
+    const user = await this.loadUserPort.loadUser(email);
+    const userProducts = await this.loadUserProductsPort.loadUserProducts(
+      user.email
+    );
     return userProducts;
   }
 }

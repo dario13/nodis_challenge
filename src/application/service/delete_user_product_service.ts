@@ -10,9 +10,11 @@ export class DeleteUserProductService implements DeleteUserProductUseCase {
     readonly deleteUserProductPort: DeleteUserProductPort
   ) {}
 
-  deleteProduct(command: DeleteUserProductCommand): Status | Error {
+  async deleteProduct(
+    command: DeleteUserProductCommand
+  ): Promise<Status | Error> {
     try {
-      const userProduct = this.userProductPort.loadUserProduct(
+      const userProduct = await this.userProductPort.loadUserProduct(
         command.email,
         command.gtin13
       );
