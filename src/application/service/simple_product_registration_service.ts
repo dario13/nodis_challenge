@@ -13,21 +13,34 @@ export class SimpleProductRegistrationService
     readonly registerUserProductPort: RegisterUserProductPort
   ) {}
 
-  async registerAproduct(command: SimpleProductRegistrationCommand) {
-    try {
-      const product = await this.loadProductPort.loadProduct(command.gtin13);
-      const user = await this.loadUserPort.loadUser(command.email);
+  async registerAproduct(
+    command: SimpleProductRegistrationCommand
+  ): Promise<Status> {
+    return new Promise(async (resolve, reject) => {
+      const productPromise = this.loadProductPort
+        .loadProduct(command.gtin13)
+        .then();
 
-      const userProduct = new UserProduct(
-        user,
-        product,
-        command.price,
-        command.quantity
-      );
-      this.registerUserProductPort.registerUserProduct(userProduct);
-      return "created";
-    } catch (error) {
-      return error;
-    }
+      const userPromise = this.loadUserPort.loadUser(command.email).then();
+
+      return Promise.all([productPromise, userPromise])
+        .then(async ([product, user]) => {
+          const userProduct = new UserProduct(
+            user,
+            product,
+            command.price,
+            command.quantity
+          );
+          this.registerUserProductPort
+            .registerUserProduct(userProduct)
+            .then()
+            .catch();
+          return resolve("created" as Status);
+        })
+        .catch((error) => {
+          console.log("Entré con error", error);
+          reject(error);
+        });
+    });
   }
 }
