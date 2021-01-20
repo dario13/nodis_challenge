@@ -13,22 +13,21 @@ export class SimpleProductRegistrationController implements Controller {
   async run(
     request: SimpleProductRegistrationController.Request
   ): Promise<HttpResponse> {
+    const command = new SimpleProductRegistrationCommand(
+      request.gtin13,
+      request.email,
+      request.quantity,
+      request.price
+    );
+    const validate = validateCommand(command);
+    const productRegistration = this.simpleProductRegistrationUseCase.registerAproduct(
+      command
+    );
     try {
-      const command = new SimpleProductRegistrationCommand(
-        request.gtin13,
-        request.email,
-        request.quantity,
-        request.price
-      );
-      const validate = validateCommand(command);
-      const productRegistration = this.simpleProductRegistrationUseCase.registerAproduct(
-        command
-      );
-
       return await Promise.all([validate, productRegistration])
         .then((value) => ok(value))
-        .catch((error) => {
-          return badRequest(error);
+        .catch((err: Error) => {
+          return badRequest(err);
         });
     } catch (error) {
       return serverError(error);
