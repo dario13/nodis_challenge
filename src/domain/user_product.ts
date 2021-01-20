@@ -6,7 +6,7 @@ import { Uuid } from "./value_objects/uuid";
 export type Status = "created" | "updated" | "deleted";
 
 export class UserProduct {
-  private _id: Uuid;
+  private readonly _id: Uuid;
   private _user: User;
   private _product: Product;
   private _price: number;
@@ -85,6 +85,26 @@ export class UserProduct {
 
   get id() {
     return this._id;
+  }
+
+  get createdAt() {
+    return this._createdAt;
+  }
+
+  get updatedAt() {
+    return this._updatedAt;
+  }
+
+  get deletedAt() {
+    return this._deletedAt;
+  }
+
+  get user() {
+    return this._user;
+  }
+
+  get product() {
+    return this._product;
   }
 
   public delete() {
