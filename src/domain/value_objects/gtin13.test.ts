@@ -1,4 +1,4 @@
-import { InvalidArgument } from "../exceptions/invalid_argument";
+import { InvalidArgument } from "../errors/invalid_argument";
 import { Gtin13 } from "./gtin13";
 
 describe("Gtin13 test", () => {
