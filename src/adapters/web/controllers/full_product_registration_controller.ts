@@ -13,21 +13,21 @@ export class FullProductRegistrationController implements Controller {
   async run(
     request: FullProductRegistrationController.Request
   ): Promise<HttpResponse> {
-    const command = new FullProductRegistrationCommand(
-      request.gtin13,
-      request.email,
-      request.quantity,
-      request.price,
-      request.name,
-      request.description,
-      request.images
-    );
-
-    const validate = validateCommand(command);
-    const productRegistration = this.fullProductRegistrationController.registerAproduct(
-      command
-    );
     try {
+      const command = new FullProductRegistrationCommand(
+        request.gtin13,
+        request.email,
+        request.quantity,
+        request.price,
+        request.name,
+        request.description,
+        request.images
+      );
+
+      const validate = validateCommand(command);
+      const productRegistration = this.fullProductRegistrationController.registerAproduct(
+        command
+      );
       return await Promise.all([validate, productRegistration])
         .then((value) => ok(value))
         .catch((err: Error) => {

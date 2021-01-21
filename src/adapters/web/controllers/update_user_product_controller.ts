@@ -27,15 +27,12 @@ export class UpdateUserProductController implements Controller {
       const updateUser = this.updateUserProductUseCase.updateUserProduct(
         command
       );
-      try {
-        return await Promise.all([validate, updateUser])
-          .then((value) => ok(value))
-          .catch((err: Error) => {
-            return badRequest(err);
-          });
-      } catch (error) {
-        return serverError(error);
-      }
+
+      return await Promise.all([validate, updateUser])
+        .then((value) => ok(value))
+        .catch((err: Error) => {
+          return badRequest(err);
+        });
     } catch (error) {
       return serverError(error);
     }
