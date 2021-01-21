@@ -6,7 +6,7 @@ import { Uuid } from "../../domain/value_objects/uuid";
 export const productMock = (...options: Partial<Product>[]): Product => {
   const defaults: Product = {
     name: faker.commerce.productName(),
-    description: faker.lorem.text(),
+    description: faker.commerce.productDescription(),
     gtin13: gtin13Faker,
     images: [faker.random.alpha(), faker.random.alpha()],
     id: Uuid.random(),
