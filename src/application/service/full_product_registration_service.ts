@@ -20,7 +20,7 @@ export class FullProductRegistrationService
     command: FullProductRegistrationCommand
   ): Promise<Status> {
     try {
-      if (!this.searchIfProductExists(command.gtin13, command.name)) {
+      if (!(await this.searchIfProductExists(command.gtin13, command.name))) {
         const user = await this.loadUserPort.loadUser(command.email);
         const product = new Product(
           command.name,
@@ -48,7 +48,7 @@ export class FullProductRegistrationService
 
   //if loadProduct return a throw is because the product
   //was not found and the products doesn't exists
-  async searchIfProductExists(gtin13: string, name: string) {
+  async searchIfProductExists(gtin13: string, name: string): Promise<boolean> {
     try {
       await this.loadProductPort.loadProduct(gtin13, name);
       return true;
