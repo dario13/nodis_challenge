@@ -1,9 +1,9 @@
 import { UserProduct } from "../../domain/user_product";
-import { LoadUserProducstQuery } from "../port/in/load_user_products_query";
+import { LoadUserProducstQuery } from "../port/in/query/load_user_products_query";
 import { LoadUserPort } from "../port/out/load_user_port";
 import { LoadUserProductsPort } from "../port/out/load_user_products_port";
 
-export class GetUserProductsService implements LoadUserProducstQuery {
+export class LoadUserProductsService implements LoadUserProducstQuery {
   constructor(
     readonly loadUserPort: LoadUserPort,
     readonly loadUserProductsPort: LoadUserProductsPort

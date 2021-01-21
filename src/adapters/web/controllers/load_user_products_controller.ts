@@ -1,4 +1,4 @@
-import { LoadUserProducstQuery } from "../../../application/port/in/load_user_products_query";
+import { LoadUserProducstQuery } from "../../../application/port/in/query/load_user_products_query";
 import { ok, serverError } from "../../helpers/http_helper";
 import { Controller } from "../../protocols/controller";
 import { HttpResponse } from "../../protocols/http_response";

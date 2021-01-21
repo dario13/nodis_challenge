@@ -1,6 +1,12 @@
-import { DeleteUserProductCommand } from "../../../application/port/in/delete_user_product_command";
-import { DeleteUserProductUseCase } from "../../../application/port/in/delete_user_product_use_case";
-import { badRequest, noContent, serverError } from "../../helpers/http_helper";
+import { DeleteUserProductCommand } from "../../../application/port/in/command/delete_user_product_command";
+import { DeleteUserProductUseCase } from "../../../application/port/in/use_case/delete_user_product_use_case";
+import {
+  badRequest,
+  noContent,
+  ok,
+  serverError,
+} from "../../helpers/http_helper";
+import { validateCommand } from "../../helpers/validate_command";
 import { Controller } from "../../protocols/controller";
 import { HttpResponse } from "../../protocols/http_response";
 
@@ -14,9 +20,17 @@ export class DeleteUserProductController implements Controller {
         request.gtin13,
         request.email
       );
-      const register = this.deleteUserProductUseCase.deleteProduct(command);
-      if (register instanceof Error) return badRequest(register);
-      return noContent();
+      const validate = validateCommand(command);
+      const deleteUser = this.deleteUserProductUseCase.deleteProduct(command);
+      try {
+        return await Promise.all([validate, deleteUser])
+          .then((value) => ok(value))
+          .catch((err: Error) => {
+            return badRequest(err);
+          });
+      } catch (error) {
+        return serverError(error);
+      }
     } catch (error) {
       return serverError(error);
     }

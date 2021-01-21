@@ -1,4 +1,4 @@
-import { registrationCommandMock } from "../../tests/mocks/registration_command_mock";
+import { simpleProductRegistrationCommandMock } from "../../tests/mocks/simple_product_registration_command_mock";
 import { RepositoryMock } from "../../tests/mocks/repository_mock";
 import { SimpleProductRegistrationService } from "./simple_product_registration_service";
 
@@ -13,7 +13,7 @@ describe("Test for simple product registration", () => {
     );
 
     const registerAproduct = service.registerAproduct(
-      registrationCommandMock()
+      simpleProductRegistrationCommandMock()
     );
 
     expect(registerAproduct).resolves;

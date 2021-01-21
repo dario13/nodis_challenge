@@ -1,5 +1,5 @@
-import { SimpleProductRegistrationCommand } from "../../../application/port/in/simple_product_registration_command";
-import { SimpleProductRegistrationUseCase } from "../../../application/port/in/simple_product_registration_use_case";
+import { SimpleProductRegistrationCommand } from "../../../application/port/in/command/simple_product_registration_command";
+import { SimpleProductRegistrationUseCase } from "../../../application/port/in/query/simple_product_registration_use_case";
 import { badRequest, ok, serverError } from "../../helpers/http_helper";
 import { Controller } from "../../protocols/controller";
 import { HttpResponse } from "../../protocols/http_response";

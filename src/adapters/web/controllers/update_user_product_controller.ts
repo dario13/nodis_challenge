@@ -1,6 +1,12 @@
-import { UpdateUserProductCommand } from "../../../application/port/in/update_user_product_command";
-import { UpdateUserProductUseCase } from "../../../application/port/in/update_user_product_use_case";
-import { badRequest, noContent, serverError } from "../../helpers/http_helper";
+import { UpdateUserProductCommand } from "../../../application/port/in/command/update_user_product_command";
+import { UpdateUserProductUseCase } from "../../../application/port/in/use_case/update_user_product_use_case";
+import {
+  badRequest,
+  noContent,
+  ok,
+  serverError,
+} from "../../helpers/http_helper";
+import { validateCommand } from "../../helpers/validate_command";
 import { Controller } from "../../protocols/controller";
 import { HttpResponse } from "../../protocols/http_response";
 
@@ -17,9 +23,19 @@ export class UpdateUserProductController implements Controller {
         request.quantity,
         request.price
       );
-      const register = this.updateUserProductUseCase.updateUserProduct(command);
-      if (register instanceof Error) return badRequest(register);
-      return noContent();
+      const validate = validateCommand(command);
+      const updateUser = this.updateUserProductUseCase.updateUserProduct(
+        command
+      );
+      try {
+        return await Promise.all([validate, updateUser])
+          .then((value) => ok(value))
+          .catch((err: Error) => {
+            return badRequest(err);
+          });
+      } catch (error) {
+        return serverError(error);
+      }
     } catch (error) {
       return serverError(error);
     }
