@@ -1,6 +1,6 @@
 import { Status, UserProduct } from "../../domain/user_product";
 import { SimpleProductRegistrationCommand } from "../port/in/command/simple_product_registration_command";
-import { SimpleProductRegistrationUseCase } from "../port/in/query/simple_product_registration_use_case";
+import { SimpleProductRegistrationUseCase } from "../port/in/use_case/simple_product_registration_use_case";
 import { LoadProductPort } from "../port/out/load_product_port";
 import { LoadUserPort } from "../port/out/load_user_port";
 import { RegisterUserProductPort } from "../port/out/register_user_product_port";
