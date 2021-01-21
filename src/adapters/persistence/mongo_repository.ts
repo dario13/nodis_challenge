@@ -1,3 +1,4 @@
+import { CreateUserPort } from "../../application/port/out/create_user_port";
 import { DeleteUserProductPort } from "../../application/port/out/delete_user_product_port";
 import { LoadProductPort } from "../../application/port/out/load_product_port";
 import { LoadUserPort } from "../../application/port/out/load_user_port";
@@ -14,6 +15,7 @@ export class MongoRepository
   implements
     DeleteUserProductPort,
     LoadProductPort,
+    CreateUserPort,
     LoadUserPort,
     LoadUserProductPort,
     LoadUserProductsPort,
@@ -52,12 +54,22 @@ export class MongoRepository
   }
 
   async loadUser(email: string): Promise<User> {
-    const userDoc = await UserModel.find({ email: email }, (doc: any) => {
-      return doc;
-    });
+    const userDoc = await UserModel.find({ email: email }).exec();
     if (userDoc.length > 0)
       return new User(userDoc.name, userDoc.email, userDoc._id);
     throw Error("User not found");
+  }
+
+  async createUser(user: User): Promise<void> {
+    const userDoc = {
+      _id: user.id!.value,
+      email: user.email,
+      name: user.name,
+    };
+    const userToSave = new UserModel(userDoc);
+    userToSave.save((err: any) => {
+      if (err) throw new Error(err);
+    });
   }
 
   async loadUserProduct(email: string, gtin13: string): Promise<UserProduct> {
@@ -82,7 +94,7 @@ export class MongoRepository
 
   async registerProduct(product: Product): Promise<void> {
     const productDoc = {
-      _id: product.id,
+      _id: product.id!.value,
       gtin13: product.gtin13,
       name: product.name,
       images: product.images,
@@ -90,19 +102,19 @@ export class MongoRepository
     };
     const productToSave = new ProductModel(productDoc);
     productToSave.save((err: any) => {
-      throw new Error(err);
+      if (err) throw new Error(err);
     });
   }
 
   async registerUserProduct(userProduct: UserProduct): Promise<void> {
     const userProductDoc = {
-      _id: userProduct.id,
+      _id: userProduct.id.value,
       price: userProduct.price,
       quantity: userProduct.quantity,
     };
     const userProductToSave = new UserProductModel(userProductDoc);
     userProductToSave.save((err: any) => {
-      throw new Error(err);
+      if (err) throw new Error(err);
     });
   }
 }

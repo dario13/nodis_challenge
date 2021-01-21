@@ -6,6 +6,7 @@ import { loadUserProductsControllerFactory } from "../factories/controllers/load
 import { simpleRegistrationControllerFactory } from "../factories/controllers/simple_registration_controller_factory";
 import { loadProductControllerFactory } from "../factories/controllers/load_product_controller_factory";
 import { updateUserProductControllerFactory } from "../factories/controllers/update_user_product_controller_factory";
+import { createUserControllerFactory } from "../factories/controllers/create_user_controller_factory";
 
 export default (app: Express): void => {
   app.delete(
@@ -20,6 +21,7 @@ export default (app: Express): void => {
     "/simple_product_registration",
     expressRouteAdapter(simpleRegistrationControllerFactory())
   );
+  app.put("/user", expressRouteAdapter(createUserControllerFactory()));
   app.get("/user_product", expressRouteAdapter(loadProductControllerFactory()));
   app.post(
     "/user_product",
