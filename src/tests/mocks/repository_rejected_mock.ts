@@ -11,7 +11,7 @@ import { productMock } from "./product_mock";
 import { userMock } from "./user_mock";
 import { userProductMock } from "./user_product_mock";
 
-export class RepositoryMock
+export class RepositoryRejectedMock
   implements
     LoadProductPort,
     LoadUserPort,
@@ -22,43 +22,38 @@ export class RepositoryMock
   constructor() {}
 
   async deleteUserProduct(userProduct: UserProduct): Promise<void> {
-    return Promise.resolve();
+    return Promise.reject();
   }
 
   async loadProduct(gtin13: string, name?: string): Promise<Product> {
-    return productMock({ gtin13, name });
+    return Promise.reject();
   }
 
   async loadUser(email: string): Promise<User> {
-    return userMock({ email });
+    return Promise.reject();
   }
 
   async createUser(user: User): Promise<void> {
-    return Promise.resolve();
+    return Promise.reject();
   }
 
   async loadUserProduct(email: string, gtin13: string): Promise<UserProduct> {
-    const user = userMock({ email });
-    const product = productMock({ gtin13 });
-    return userProductMock(user, product);
+    return Promise.reject();
   }
 
   async loadUserProducts(email: string): Promise<Array<UserProduct>> {
-    const user = userMock({ email });
-    const userProduct1 = userProductMock(user);
-    const userProduct2 = userProductMock(user);
-    return [userProduct1, userProduct2];
+    return Promise.reject();
   }
 
   async registerProduct(product: Product): Promise<void> {
-    return Promise.resolve();
+    return Promise.reject();
   }
 
   async registerUserProduct(userProduct: UserProduct): Promise<void> {
-    return Promise.resolve();
+    return Promise.reject();
   }
 
   async updateUserProduct(userProduct: UserProduct): Promise<void> {
-    return Promise.resolve();
+    return Promise.reject();
   }
 }

@@ -22,7 +22,7 @@ export class CreateUserService implements CreateUserUseCase {
 
   //if loadUser return a throw is because the user
   //was not found and then doesn't exists
-  async checkIfUserAlreadyExists(email: string): Promise<boolean> {
+  private async checkIfUserAlreadyExists(email: string): Promise<boolean> {
     try {
       await this.loadUserPort.loadUser(email);
       return true;
