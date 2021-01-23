@@ -4,7 +4,7 @@
   "description": "",
   "main": "lib/src/index.js",
   "scripts": {
-    "test": "tsc | jest  --watchAll"
+    "test": "tsc | jest  --watchAll --coverage"
   },
   "keywords": [],
   "author": "",
@@ -44,7 +44,13 @@
     }
   },
   "dependencies": {
-    "class-validator": "^0.13.0",
+    "@types/faker": "^5.1.5",
+    "@types/mongoose": "^5.10.3",
+    "body-parser": "^1.19.0",
+    "class-validator": "^0.13.1",
+    "ean-generator": "0.0.8",
+    "faker": "^5.1.0",
+    "mongoose": "^5.11.12",
     "uuid": "^8.3.2"
   }
 }

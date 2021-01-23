@@ -1,4 +1,12 @@
-import { Length, IsInt, IsNotEmpty, IsEmail } from "class-validator";
+import {
+  Length,
+  IsInt,
+  IsNotEmpty,
+  IsEmail,
+  IsArray,
+  ValidateNested,
+  IsUrl,
+} from "class-validator";
 
 export class FullProductRegistrationCommand {
   @IsNotEmpty()
@@ -26,6 +34,7 @@ export class FullProductRegistrationCommand {
   readonly description: string;
 
   @IsNotEmpty()
+  @IsUrl({}, { each: true })
   readonly images: Array<string>;
 
   constructor(

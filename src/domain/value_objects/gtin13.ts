@@ -1,4 +1,4 @@
-import { InvalidArgument } from "../exceptions/invalid_argument";
+import { InvalidArgument } from "../errors/invalid_argument";
 import { ValueObject } from "./value_object";
 
 export class Gtin13 implements ValueObject<string> {
