@@ -44,7 +44,10 @@ export class FullProductRegistrationService
 
   //if loadProduct return a throw is because the product
   //was not found and the products doesn't exists
-  async searchIfProductExists(gtin13: string, name: string): Promise<boolean> {
+  private async searchIfProductExists(
+    gtin13: string,
+    name: string
+  ): Promise<boolean> {
     try {
       await this.loadProductPort.loadProduct(gtin13, name);
       return true;
