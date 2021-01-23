@@ -5,6 +5,7 @@ export const simpleRegistrationUseCaseFactory = (): SimpleProductRegistrationSer
   return new SimpleProductRegistrationService(
     mongoRepositoryFactory,
     mongoRepositoryFactory,
+    mongoRepositoryFactory,
     mongoRepositoryFactory
   );
 };

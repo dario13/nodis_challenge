@@ -15,14 +15,16 @@ export class DeleteUserProductController implements Controller {
         request.gtin13,
         request.email
       );
-      const validate = validateCommand(command);
-      const deleteUser = this.deleteUserProductUseCase.deleteProduct(command);
+      try {
+        await validateCommand(command).then();
+        const deleteUser = await this.deleteUserProductUseCase.deleteProduct(
+          command
+        );
 
-      return await Promise.all([validate, deleteUser])
-        .then((value) => ok(value))
-        .catch((err: Error) => {
-          return badRequest(err);
-        });
+        return ok(deleteUser);
+      } catch (error) {
+        return badRequest(error);
+      }
     } catch (error) {
       return serverError(error);
     }

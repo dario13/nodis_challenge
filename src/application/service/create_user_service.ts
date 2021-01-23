@@ -17,7 +17,7 @@ export class CreateUserService implements CreateUserUseCase {
       return "created";
     }
 
-    throw Error("The user to register is already exists");
+    throw Error("The user to register already exists");
   }
 
   //if loadUser return a throw is because the user

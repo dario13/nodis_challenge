@@ -9,6 +9,7 @@ describe("Test for simple product registration", () => {
     const service = new SimpleProductRegistrationService(
       repository,
       repository,
+      repository,
       repository
     );
 

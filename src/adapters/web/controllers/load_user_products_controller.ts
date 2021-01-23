@@ -1,5 +1,5 @@
 import { LoadUserProducstQuery } from "../../../application/port/in/query/load_user_products_query";
-import { ok, serverError } from "../../helpers/http_helper";
+import { badRequest, ok } from "../../helpers/http_helper";
 import { Controller } from "../../protocols/controller";
 import { HttpResponse } from "../../protocols/http_response";
 
@@ -9,12 +9,12 @@ export class LoadUserProductsController implements Controller {
     request: LoadUserProductsController.Request
   ): Promise<HttpResponse> {
     try {
-      const products = this.loadUserProductsQuery.getUserProducts(
+      const products = await this.loadUserProductsQuery.getUserProducts(
         request.email
       );
       return ok(products);
     } catch (error) {
-      return serverError(error);
+      return badRequest(error);
     }
   }
 }

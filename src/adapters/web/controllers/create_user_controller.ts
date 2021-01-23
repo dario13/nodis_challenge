@@ -10,14 +10,16 @@ export class CreateUserController implements Controller {
   async run(request: CreateUserController.Request): Promise<HttpResponse> {
     try {
       const command = new CreateUserCommand(request.email, request.name);
-      const validate = validateCommand(command);
-      const createUser = this.createUserProductUseCase.createUser(command);
+      try {
+        await validateCommand(command).then();
+        const createUser = await this.createUserProductUseCase.createUser(
+          command
+        );
 
-      return await Promise.all([validate, createUser])
-        .then((value) => ok(value))
-        .catch((err: Error) => {
-          return badRequest(err);
-        });
+        return ok(createUser);
+      } catch (error) {
+        return badRequest(error);
+      }
     } catch (error) {
       return serverError(error);
     }

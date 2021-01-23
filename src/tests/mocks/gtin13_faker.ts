@@ -1,1 +1,1 @@
-export const gtin13Faker = "978020137962";
+export const gtin13Faker = "7890920182138";

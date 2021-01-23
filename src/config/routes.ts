@@ -22,7 +22,7 @@ export default (app: Express): void => {
     expressRouteAdapter(simpleRegistrationControllerFactory())
   );
   app.put("/user", expressRouteAdapter(createUserControllerFactory()));
-  app.get("/user_product", expressRouteAdapter(loadProductControllerFactory()));
+  app.get("/product", expressRouteAdapter(loadProductControllerFactory()));
   app.post(
     "/user_product",
     expressRouteAdapter(updateUserProductControllerFactory())

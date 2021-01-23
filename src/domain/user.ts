@@ -4,8 +4,8 @@ export class User {
   constructor(
     readonly name: string,
     readonly email: string,
-    readonly id?: Uuid
+    readonly id?: string
   ) {
-    this.id = id || Uuid.random();
+    this.id = id || Uuid.random().value!;
   }
 }

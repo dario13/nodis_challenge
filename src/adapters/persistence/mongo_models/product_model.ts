@@ -8,4 +8,12 @@ const ProductSchema = new mongoose.Schema({
   description: { type: String, required: true },
 });
 
-export const ProductModel = mongoose.model("Product", ProductSchema);
+export interface IProduct extends mongoose.Document {
+  _id: string;
+  gtin13: string;
+  name: string;
+  images: Array<string>;
+  description: string;
+}
+
+export const ProductModel = mongoose.model<IProduct>("Product", ProductSchema);

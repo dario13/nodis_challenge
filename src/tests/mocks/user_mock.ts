@@ -6,7 +6,7 @@ export const userMock = (...options: Partial<User>[]): User => {
   const defaults: User = {
     name: faker.commerce.productName(),
     email: faker.internet.email(),
-    id: Uuid.random(),
+    id: Uuid.random().value,
   };
   return Object.assign({}, defaults, ...options);
 };

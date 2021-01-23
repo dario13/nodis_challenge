@@ -20,16 +20,16 @@ export class SimpleProductRegistrationController implements Controller {
         request.quantity,
         request.price
       );
-      const validate = validateCommand(command);
-      const productRegistration = this.simpleProductRegistrationUseCase.registerAproduct(
-        command
-      );
+      try {
+        await validateCommand(command).then();
+        const productRegistration = await this.simpleProductRegistrationUseCase.registerAproduct(
+          command
+        );
 
-      return await Promise.all([validate, productRegistration])
-        .then((value) => ok(value))
-        .catch((err: Error) => {
-          return badRequest(err);
-        });
+        return ok(productRegistration);
+      } catch (error) {
+        return badRequest(error);
+      }
     } catch (error) {
       return serverError(error);
     }

@@ -23,16 +23,16 @@ export class FullProductRegistrationController implements Controller {
         request.description,
         request.images
       );
+      try {
+        await validateCommand(command);
+        const productRegistration = await this.fullProductRegistrationController.registerAproduct(
+          command
+        );
 
-      const validate = validateCommand(command);
-      const productRegistration = this.fullProductRegistrationController.registerAproduct(
-        command
-      );
-      return await Promise.all([validate, productRegistration])
-        .then((value) => ok(value))
-        .catch((err: Error) => {
-          return badRequest(err);
-        });
+        return ok(productRegistration);
+      } catch (error) {
+        return badRequest(error);
+      }
     } catch (error) {
       return serverError(error);
     }

@@ -9,7 +9,7 @@ export const productMock = (...options: Partial<Product>[]): Product => {
     description: faker.commerce.productDescription(),
     gtin13: gtin13Faker,
     images: [faker.random.alpha(), faker.random.alpha()],
-    id: Uuid.random(),
+    id: Uuid.random().value,
   };
   return Object.assign({}, defaults, ...options);
 };

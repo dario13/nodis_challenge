@@ -1,11 +1,11 @@
-import { IsNotEmpty, IsEmail, IsAlpha } from "class-validator";
+import { IsNotEmpty, IsEmail, Length } from "class-validator";
 
 export class CreateUserCommand {
   @IsNotEmpty()
   @IsEmail()
   readonly email: string;
 
-  @IsAlpha("pt-PT")
+  @Length(3, 64)
   readonly name: string;
 
   constructor(email: string, name: string) {

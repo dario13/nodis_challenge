@@ -19,31 +19,27 @@ export class FullProductRegistrationService
   async registerAproduct(
     command: FullProductRegistrationCommand
   ): Promise<Status> {
-    try {
-      if (!(await this.searchIfProductExists(command.gtin13, command.name))) {
-        const user = await this.loadUserPort.loadUser(command.email);
-        const product = new Product(
-          command.name,
-          command.description,
-          command.gtin13,
-          command.images
-        );
-        const userProduct = new UserProduct(
-          user,
-          product,
-          command.price,
-          command.quantity
-        );
-        await this.registerProductPort.registerProduct(product);
-        await this.registerUserProductPort.registerUserProduct(userProduct);
-        return "created";
-      }
-      throw Error(
-        "The product to be registered cannot be the same as an existing one"
+    if (!(await this.searchIfProductExists(command.gtin13, command.name))) {
+      const user = await this.loadUserPort.loadUser(command.email);
+      const product = new Product(
+        command.name,
+        command.description,
+        command.gtin13,
+        command.images
       );
-    } catch (error) {
-      return error;
+      const userProduct = new UserProduct(
+        user,
+        product,
+        command.price,
+        command.quantity
+      );
+      await this.registerProductPort.registerProduct(product);
+      await this.registerUserProductPort.registerUserProduct(userProduct);
+      return "created";
     }
+    throw Error(
+      "The product to be registered cannot be the same as an existing one"
+    );
   }
 
   //if loadProduct return a throw is because the product

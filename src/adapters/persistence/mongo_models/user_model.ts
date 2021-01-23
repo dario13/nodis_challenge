@@ -6,4 +6,10 @@ export const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
 });
 
-export const UserModel = mongoose.model("User", UserSchema);
+export interface IUser extends mongoose.Document {
+  _id: string;
+  email: string;
+  name: string;
+}
+
+export const UserModel = mongoose.model<IUser>("User", UserSchema);

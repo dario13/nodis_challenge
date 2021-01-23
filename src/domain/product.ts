@@ -7,9 +7,9 @@ export class Product {
     readonly description: string,
     readonly gtin13: string,
     readonly images: Array<string>,
-    readonly id?: Uuid
+    readonly id?: string
   ) {
-    this.id = id || Uuid.random();
+    this.id = id || Uuid.random().value;
     this.gtin13 = new Gtin13(gtin13).value;
   }
 }

@@ -2,25 +2,21 @@ import { Status } from "../../domain/user_product";
 import { UpdateUserProductCommand } from "../port/in/command/update_user_product_command";
 import { UpdateUserProductUseCase } from "../port/in/use_case/update_user_product_use_case";
 import { LoadUserProductPort } from "../port/out/load_user_product_port";
-import { RegisterUserProductPort } from "../port/out/register_user_product_port";
+import { UpdateUserProductPort } from "../port/out/update_user_product_port";
 
 export class UpdateUserProductService implements UpdateUserProductUseCase {
   constructor(
     readonly loadUserProductPort: LoadUserProductPort,
-    readonly registerUserPort: RegisterUserProductPort
+    readonly updateUserProductPort: UpdateUserProductPort
   ) {}
   async updateUserProduct(command: UpdateUserProductCommand): Promise<Status> {
-    try {
-      const product = await this.loadUserProductPort.loadUserProduct(
-        command.email,
-        command.gtin13
-      );
-      product.price = command.price;
-      product.quantity = command.quantity;
-      this.registerUserPort.registerUserProduct(product);
-      return "updated";
-    } catch (error) {
-      return error;
-    }
+    const userProduct = await this.loadUserProductPort.loadUserProduct(
+      command.email,
+      command.gtin13
+    );
+    userProduct.price = command.price;
+    userProduct.quantity = command.quantity;
+    await this.updateUserProductPort.updateUserProduct(userProduct);
+    return "updated";
   }
 }

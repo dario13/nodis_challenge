@@ -6,32 +6,38 @@ import { Uuid } from "./value_objects/uuid";
 export type Status = "created" | "updated" | "deleted";
 
 export class UserProduct {
-  private readonly _id: Uuid;
+  private readonly _id: string;
   private _user: User;
   private _product: Product;
   private _price: number;
   private _quantity: number;
   private _status: Status;
   private _createdAt: Date;
-  private _updatedAt: Date;
-  private _deletedAt: Date;
+  private _updatedAt?: Date;
+  private _deletedAt?: Date;
 
   constructor(
     user: User,
     product: Product,
     price: number,
     quantity: number,
-    id?: Uuid
+    id?: string,
+    createdAt?: Date,
+    status?: Status,
+    updatedAt?: Date,
+    deletedAt?: Date
   ) {
     this.ensurePriceIsBiggerThanZero(price);
     this.ensureIsValidQuantityForCreation(quantity);
-    this._id = id || Uuid.random();
+    this._id = id || Uuid.random().value;
     this._user = user;
     this._product = product;
     this._price = price;
     this._quantity = quantity;
-    this._status = "created";
-    this._createdAt = new Date(Date.now());
+    this._status = status || "created";
+    this._createdAt = createdAt || new Date(Date.now());
+    this._updatedAt = updatedAt;
+    this._deletedAt = deletedAt;
   }
 
   private ensureIsValidQuantityForCreation(quantity: number) {
@@ -81,6 +87,10 @@ export class UserProduct {
 
   get quantity() {
     return this._quantity;
+  }
+
+  get status() {
+    return this._status;
   }
 
   get id() {
