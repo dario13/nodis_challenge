@@ -1,10 +1,11 @@
 {
   "name": "nodis",
   "version": "1.0.0",
-  "description": "",
-  "main": "lib/src/index.js",
+  "description": "Nodis Challenge",
+  "main": "lib/config/app.js",
   "scripts": {
-    "test": "tsc | jest  --watchAll --coverage"
+    "test": "tsc | jest  --watchAll --coverage",
+    "start": "tsc | node lib/config/app.js"
   },
   "keywords": [],
   "author": "",
