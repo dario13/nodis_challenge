@@ -1,0 +1,239 @@
+{
+	"info": {
+		"_postman_id": "973aa26b-2c75-4c45-9a27-d093e659d732",
+		"name": "Nodis Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register User ",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"test2@test.com\",\"name\":\"User Test2\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				},
+				"description": "Fields: email, name"
+			},
+			"response": []
+		},
+		{
+			"name": "Full Product Registration",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"gtin13\":\"7893093996694\",\"email\":\"test@test.com\",\"quantity\":3,\"price\":100000,\"name\":\"Tablet Samsung Galaxy Tab C\",\"description\":\"Best tablet for gammming\",\"images\":[\"http://example.com\",\"http://example2.com\"]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/full_product_registration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"full_product_registration"
+					]
+				},
+				"description": "fields: gtin13, email, quantity, price, name, description"
+			},
+			"response": []
+		},
+		{
+			"name": "Simple Product Registration",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \"gtin13\": \"7893093996694\",\n    \"email\": \"test@test.com\",\n    \"quantity\": 1000,\n    \"price\": 1000000}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/simple_product_registration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"simple_product_registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"gtin13\":\"7897125414835\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Products",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"test@test.com\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/user_products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user_products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"gtin13\": \"7893093996694\",\"email\":\"test@test.com\",\"quantity\":13246,\"price\":32165410}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/user_product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user_product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User Product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"gtin13\": \"7893093996694\",\"email\":\"test@test.com\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/user_product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user_product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Documentation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api-docs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api-docs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
