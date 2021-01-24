@@ -1,7 +1,7 @@
 import setupMiddlewares from "./middlewares";
 import setupRoutes from "./routes";
-import * as express from "express";
-import * as mongoose from "mongoose";
+import express from "express";
+import mongoose from "mongoose";
 
 const uri: string = "mongodb://0.0.0.0:2717/local";
 

@@ -4,9 +4,13 @@ import { badRequest, ok, serverError } from "../../helpers/http_helper";
 import { validateCommand } from "../../helpers/validate_command";
 import { Controller } from "../../protocols/controller";
 import { HttpResponse } from "../../protocols/http_response";
+import { Logger } from "../../persistence/logger/logger";
 
 export class UpdateUserProductController implements Controller {
-  constructor(readonly updateUserProductUseCase: UpdateUserProductUseCase) {}
+  constructor(
+    readonly updateUserProductUseCase: UpdateUserProductUseCase,
+    readonly logger: Logger
+  ) {}
 
   async run(
     request: UpdateUserProductController.Request
@@ -26,9 +30,11 @@ export class UpdateUserProductController implements Controller {
 
         return ok(updateUser);
       } catch (error) {
+        this.logger.error(error);
         return badRequest(error);
       }
     } catch (error) {
+      this.logger.error(error);
       return serverError(error);
     }
   }

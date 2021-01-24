@@ -4,10 +4,12 @@ import { badRequest, ok, serverError } from "../../helpers/http_helper";
 import { Controller } from "../../protocols/controller";
 import { HttpResponse } from "../../protocols/http_response";
 import { validateCommand } from "../../helpers/validate_command";
+import { Logger } from "../../persistence/logger/logger";
 
 export class SimpleProductRegistrationController implements Controller {
   constructor(
-    readonly simpleProductRegistrationUseCase: SimpleProductRegistrationUseCase
+    readonly simpleProductRegistrationUseCase: SimpleProductRegistrationUseCase,
+    readonly logger: Logger
   ) {}
 
   async run(
@@ -28,9 +30,11 @@ export class SimpleProductRegistrationController implements Controller {
 
         return ok(productRegistration);
       } catch (error) {
+        this.logger.error(error);
         return badRequest(error);
       }
     } catch (error) {
+      this.logger.error(error);
       return serverError(error);
     }
   }

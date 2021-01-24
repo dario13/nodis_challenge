@@ -2,12 +2,14 @@ import { FullProductRegistrationCommand } from "../../../application/port/in/com
 import { FullProductRegistrationUseCase } from "../../../application/port/in/use_case/full_product_registration_use_case";
 import { badRequest, ok, serverError } from "../../helpers/http_helper";
 import { validateCommand } from "../../helpers/validate_command";
+import { Logger } from "../../persistence/logger/logger";
 import { Controller } from "../../protocols/controller";
 import { HttpResponse } from "../../protocols/http_response";
 
 export class FullProductRegistrationController implements Controller {
   constructor(
-    readonly fullProductRegistrationController: FullProductRegistrationUseCase
+    readonly fullProductRegistrationController: FullProductRegistrationUseCase,
+    readonly logger: Logger
   ) {}
 
   async run(
@@ -31,9 +33,11 @@ export class FullProductRegistrationController implements Controller {
 
         return ok(productRegistration);
       } catch (error) {
+        this.logger.error(error);
         return badRequest(error);
       }
     } catch (error) {
+      this.logger.error(error);
       return serverError(error);
     }
   }

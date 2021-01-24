@@ -2,11 +2,15 @@ import { CreateUserCommand } from "../../../application/port/in/command/create_u
 import { CreateUserUseCase } from "../../../application/port/in/use_case/create_user_use_case";
 import { badRequest, ok, serverError } from "../../helpers/http_helper";
 import { validateCommand } from "../../helpers/validate_command";
+import { Logger } from "../../persistence/logger/logger";
 import { Controller } from "../../protocols/controller";
 import { HttpResponse } from "../../protocols/http_response";
 
 export class CreateUserController implements Controller {
-  constructor(readonly createUserProductUseCase: CreateUserUseCase) {}
+  constructor(
+    readonly createUserProductUseCase: CreateUserUseCase,
+    readonly logger: Logger
+  ) {}
   async run(request: CreateUserController.Request): Promise<HttpResponse> {
     try {
       const command = new CreateUserCommand(request.email, request.name);
@@ -18,9 +22,11 @@ export class CreateUserController implements Controller {
 
         return ok(createUser);
       } catch (error) {
+        this.logger.error(error);
         return badRequest(error);
       }
     } catch (error) {
+      this.logger.error(error);
       return serverError(error);
     }
   }

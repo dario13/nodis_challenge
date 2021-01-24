@@ -2,9 +2,13 @@ import { LoadUserProducstQuery } from "../../../application/port/in/query/load_u
 import { badRequest, ok } from "../../helpers/http_helper";
 import { Controller } from "../../protocols/controller";
 import { HttpResponse } from "../../protocols/http_response";
+import { Logger } from "../../persistence/logger/logger";
 
 export class LoadUserProductsController implements Controller {
-  constructor(readonly loadUserProductsQuery: LoadUserProducstQuery) {}
+  constructor(
+    readonly loadUserProductsQuery: LoadUserProducstQuery,
+    readonly logger: Logger
+  ) {}
   async run(
     request: LoadUserProductsController.Request
   ): Promise<HttpResponse> {
@@ -14,6 +18,7 @@ export class LoadUserProductsController implements Controller {
       );
       return ok(products);
     } catch (error) {
+      this.logger.error(error);
       return badRequest(error);
     }
   }
