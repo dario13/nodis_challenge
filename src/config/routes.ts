@@ -13,17 +13,17 @@ export default (app: Express): void => {
     "/user_product",
     expressRouteAdapter(deleteUserProductControllerFactory())
   );
-  app.put(
+  app.post(
     "/full_product_registration",
     expressRouteAdapter(fullProductRegistrationControllerFactory())
   );
-  app.put(
+  app.post(
     "/simple_product_registration",
     expressRouteAdapter(simpleRegistrationControllerFactory())
   );
-  app.put("/user", expressRouteAdapter(createUserControllerFactory()));
+  app.post("/user", expressRouteAdapter(createUserControllerFactory()));
   app.get("/product", expressRouteAdapter(loadProductControllerFactory()));
-  app.post(
+  app.put(
     "/user_product",
     expressRouteAdapter(updateUserProductControllerFactory())
   );
