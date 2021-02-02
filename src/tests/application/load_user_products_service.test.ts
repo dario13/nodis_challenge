@@ -1,6 +1,6 @@
+import { LoadUserProductsService } from "../../application/service/load_user_products_service";
 import { RepositoryMock } from "../../tests/mocks/repository_mock";
 import { userProductMock } from "../../tests/mocks/user_product_mock";
-import { LoadUserProductsService } from "./load_user_products_service";
 
 const repositoryResolve = new RepositoryMock();
 

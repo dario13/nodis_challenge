@@ -1,7 +1,7 @@
-import { fullProductRegistrationCommandMock } from "../../tests/mocks/full_product_registration_command_mock";
-import { RepositoryMock } from "../../tests/mocks/repository_mock";
-import { RepositoryRejectedMock } from "../../tests/mocks/repository_rejected_mock";
-import { CreateUserService } from "./create_user_service";
+import { fullProductRegistrationCommandMock } from "../mocks/full_product_registration_command_mock";
+import { RepositoryMock } from "../mocks/repository_mock";
+import { RepositoryRejectedMock } from "../mocks/repository_rejected_mock";
+import { CreateUserService } from "../../application/service/create_user_service";
 
 const repositoryResolve = new RepositoryMock();
 const repositoryReject = new RepositoryRejectedMock();

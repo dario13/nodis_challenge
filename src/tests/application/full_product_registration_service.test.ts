@@ -1,7 +1,7 @@
+import { FullProductRegistrationService } from "../../application/service/full_product_registration_service";
 import { fullProductRegistrationCommandMock } from "../../tests/mocks/full_product_registration_command_mock";
 import { RepositoryMock } from "../../tests/mocks/repository_mock";
 import { RepositoryRejectedMock } from "../../tests/mocks/repository_rejected_mock";
-import { FullProductRegistrationService } from "./full_product_registration_service";
 
 const repositoryResolve = new RepositoryMock();
 const repositoryReject = new RepositoryRejectedMock();

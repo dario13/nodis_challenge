@@ -1,6 +1,6 @@
+import { DeleteUserProductService } from "../../application/service/delete_user_product_service";
 import { deleteUserProductCommandMock } from "../../tests/mocks/delete_user_command_mock";
 import { RepositoryMock } from "../../tests/mocks/repository_mock";
-import { DeleteUserProductService } from "./delete_user_product_service";
 
 const repository = new RepositoryMock();
 

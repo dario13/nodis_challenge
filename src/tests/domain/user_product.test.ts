@@ -1,6 +1,6 @@
-import { Product } from "./product";
-import { User } from "./user";
-import { UserProduct } from "./user_product";
+import { Product } from "../../domain/product";
+import { User } from "../../domain/user";
+import { UserProduct } from "../../domain/user_product";
 
 const anUser = new User("UserTest", "usertest@gmail.com");
 const aProduct = new Product(

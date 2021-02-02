@@ -1,5 +1,5 @@
-import { InvalidArgument } from "../errors/invalid_argument";
-import { Gtin13 } from "./gtin13";
+import { InvalidArgument } from "../../domain/errors/invalid_argument";
+import { Gtin13 } from "../../domain/value_objects/gtin13";
 
 describe("Gtin13 test", () => {
   test("Given a valid gtin13 value then the object is created", () => {

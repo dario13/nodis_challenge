@@ -1,6 +1,6 @@
+import { UpdateUserProductService } from "../../application/service/update_user_product_service";
 import { RepositoryMock } from "../../tests/mocks/repository_mock";
 import { updateUserProductRegistrationCommandMock } from "../../tests/mocks/update_user_product_command_mock";
-import { UpdateUserProductService } from "./update_user_product_service";
 
 const repository = new RepositoryMock();
 

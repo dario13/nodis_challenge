@@ -1,7 +1,7 @@
 import { simpleProductRegistrationCommandMock } from "../../tests/mocks/simple_product_registration_command_mock";
 import { RepositoryMock } from "../../tests/mocks/repository_mock";
-import { SimpleProductRegistrationService } from "./simple_product_registration_service";
 import { RepositoryRejectedMock } from "../../tests/mocks/repository_rejected_mock";
+import { SimpleProductRegistrationService } from "../../application/service/simple_product_registration_service";
 
 const repositoryResolve = new RepositoryMock();
 const repositoryReject = new RepositoryRejectedMock();
