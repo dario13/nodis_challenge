@@ -70,12 +70,13 @@ export class MongoRepository
 
   async loadUserProduct(email: string, gtin13: string): Promise<UserProduct> {
     const user = await this.loadUser(email);
+    const productDoc = await this.loadProduct(gtin13);
     const userProductDoc: IUserProduct = await UserProductModel.findOne({
       userId: user.id,
+      productId: productDoc.id,
     }).exec();
 
     if (userProductDoc) {
-      const productDoc = await this.loadProduct(gtin13);
       return new UserProduct(
         user,
         productDoc,

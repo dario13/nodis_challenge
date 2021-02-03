@@ -10,7 +10,7 @@ import { createUserControllerFactory } from "../factories/controllers/create_use
 
 export default (app: Express): void => {
   app.delete(
-    "/user_product",
+    "/user_product/:email&:gtin13",
     expressRouteAdapter(deleteUserProductControllerFactory())
   );
   app.post(
@@ -22,13 +22,16 @@ export default (app: Express): void => {
     expressRouteAdapter(simpleRegistrationControllerFactory())
   );
   app.post("/user", expressRouteAdapter(createUserControllerFactory()));
-  app.get("/product", expressRouteAdapter(loadProductControllerFactory()));
+  app.get(
+    "/product/:gtin13",
+    expressRouteAdapter(loadProductControllerFactory())
+  );
   app.put(
-    "/user_product",
+    "/user_product/:email&:gtin13",
     expressRouteAdapter(updateUserProductControllerFactory())
   );
   app.get(
-    "/user_products",
+    "/user_products/:email",
     expressRouteAdapter(loadUserProductsControllerFactory())
   );
 };
