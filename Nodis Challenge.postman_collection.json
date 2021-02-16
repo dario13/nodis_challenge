@@ -8,11 +8,11 @@
 		{
 			"name": "Register User ",
 			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"email\":\"test2@test.com\",\"name\":\"User Test2\"}",
+					"raw": "{\"email\":\"test3@test.com\",\"name\":\"User Test2\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -44,11 +44,11 @@
 		{
 			"name": "Full Product Registration",
 			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"gtin13\":\"7893093996694\",\"email\":\"test@test.com\",\"quantity\":3,\"price\":100000,\"name\":\"Tablet Samsung Galaxy Tab C\",\"description\":\"Best tablet for gammming\",\"images\":[\"http://example.com\",\"http://example2.com\"]}",
+					"raw": "{\"gtin13\":\"789309399669\",\"email\":\"test@test.com\",\"quantity\":3,\"price\":100000,\"name\":\"Tablet Samsung Galaxy Tab AC\",\"description\":\"Best tablet for gammming\",\"images\":[\"http://example.com\",\"http://example2.com\"]}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -73,11 +73,11 @@
 		{
 			"name": "Simple Product Registration",
 			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{    \"gtin13\": \"7893093996694\",\n    \"email\": \"test@test.com\",\n    \"quantity\": 1000,\n    \"price\": 1000000}",
+					"raw": "{    \"gtin13\": \"7893093996694\",\n    \"email\": \"test2@test.com\",\n    \"quantity\": 1000,\n    \"price\": 1000000}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -108,7 +108,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"gtin13\":\"7897125414835\"}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -116,14 +116,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/product",
+					"raw": "http://localhost:3000/product/7897125414835",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"product"
+						"product",
+						"7897125414835"
 					]
 				}
 			},
@@ -139,7 +140,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"email\":\"test@test.com\"}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -147,14 +148,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/user_products",
+					"raw": "http://localhost:3000/user_products/test@test.com",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"user_products"
+						"user_products",
+						"test@test.com"
 					]
 				}
 			},
@@ -163,7 +165,7 @@
 		{
 			"name": "Update User Product",
 			"request": {
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
