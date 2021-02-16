@@ -23,34 +23,34 @@ Each user has a reference to that product, but the price and quantity is indepen
    
 The api paths are:
 
-- PUT: / user
+- POST: /user
 
 > To limit the scope of the problem, users register only with the email.
 
-- PUT: / full_product_registration
+- POST: /full_product_registration
 
 > This route is used for when a product is loaded for the first time,
 > then the product will be available for simple registration, if another
 > user wishes to use it.
 
-PUT: / simple_product_registration
+POST: /simple_product_registration
 
 > It allows the registration of a product for a user indicating only the
 > Gtin13, the price and the quantity.
 
-GET: / product
+GET: /product/:gtin13
 
 > Returns all the information of a product
 
-GET: / user_products
+GET: /user_products/:email
 
 > Returns all the products of a user
 
-UPDATE: / user_product
+PUT: /user_product/:email&:gtin13
 
 > Update the price and / or quantity of a user's product
 
-DELETE: / user_product
+DELETE: /user_product/:email&:gtin13
 
 > Marks a product as removed for a user
 
